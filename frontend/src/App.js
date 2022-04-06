@@ -11,7 +11,7 @@ import addTeam from "./components/addTeam";
 
 import { UserProvider } from "./userContext";
 import AddTeam from "./components/addTeam";
-import TeamDashboard from "./components/teamDashboard";
+import ManageTeam from "./components/manageTeam";
 import Home from "./components/home";
 import ManageIssues from "./components/manageIssues";
 
@@ -21,19 +21,19 @@ function App() {
   const themeB = createTheme({
     palette: {
       mode: "dark",
-      background: {
-        paper: "#555555",
-      },
+      // background: {
+      //   paper: "#555555",
+      // },
     },
   });
 
   const themeA = createTheme({
     palette: {
       mode: "light",
-      success: {
-        main: "#00ffb3",
-        dark: "#ccad00",
-      },
+      // success: {
+      //   main: "#00ffb3",
+      //   dark: "#ccad00",
+      // },
     },
   });
 
@@ -50,13 +50,11 @@ function App() {
               <Route element={<Login />} path="/login" />
               <Route element={<Signup />} path="/signup" />
               <Route element={<AddTeam />} path="/addteam" />
-              <Route element={<TeamDashboard />} path="/teamdash" />
+              <Route element={<ManageTeam />} path="/teamdash" />
               <Route element={<Home />} path="/home" />
               <Route element={<ManageIssues />} path="/manageissues" />
 
-
               <Route element={<Navigate to="/login" />} path="" />
-
             </Routes>
           </BrowserRouter>
         </ThemeProvider>

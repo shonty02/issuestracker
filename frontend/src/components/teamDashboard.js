@@ -1,39 +1,38 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import {Button, Container} from '@mui/material';
+import { Button, Container } from "@mui/material";
 
 const TeamDashboard = () => {
+  // const [teamCreated, setTeamCreated] = useState(true);
+  // const [team, setTeam] = useState("");
+  // const [newTeamList, setnewTeamList] = useState([
+  //   // { text: "Kon sa exam hai kal", sent: true },
+  //   // { text: "Compiler Designer, syllabus batao iska", sent: false },
+  //   // { text: "kal pata chalega jab exam denge 😎😎", sent: true },
+  //   // { text: "bye bye Good Night!!", sent: true },
+  // ]);
 
-    const [teamCreated, setTeamCreated] = useState(true);
-    const [team, setTeam] = useState("");
-    const [newTeamList, setnewTeamList] = useState([
-      // { text: "Kon sa exam hai kal", sent: true },
-      // { text: "Compiler Designer, syllabus batao iska", sent: false },
-      // { text: "kal pata chalega jab exam denge 😎😎", sent: true },
-      // { text: "bye bye Good Night!!", sent: true },
-    ]);
-  
-    useEffect(() => {
-      newTeam.connect();
-    }, []);
-  
-    // subscribing the event
-    team.on("recnewteam", (data) => {
-      console.log(data);
-      setnewTeam([...newteamList, data]);
-    });
+  // useEffect(() => {
+  //   newTeam.connect();
+  // }, []);
 
-    const newTeam = () => {
-        let obj = { text: newteam, sent: true };
-        newteam.emit("addteam", obj);
-    
-        setnewTeam([...newTeamList, obj]);
-        setnewTeam("");
-      };
+  // // subscribing the event
+  // team.on("recnewteam", (data) => {
+  //   console.log(data);
+  //   setnewTeam([...newteamList, data]);
+  // });
 
-        return (
-            <div className="container">
-              <Container>
+  // const newTeam = () => {
+  //     let obj = { text: newteam, sent: true };
+  //     newteam.emit("addteam", obj);
+
+  //     setnewTeam([...newTeamList, obj]);
+  //     setnewTeam("");
+  //   };
+
+  return (
+    <div className="container">
+      {/* <Container>
                  <div className="chat-area">{TeamDashboard()}</div>
                  <div className="chat-area">{newTeam()}</div>
 
@@ -52,14 +51,9 @@ const TeamDashboard = () => {
                 </div>
             
                 
-              </Container>
-            </div>
-        )
-    }
-
-
-
-
-
+              </Container> */}
+    </div>
+  );
+};
 
 export default TeamDashboard;

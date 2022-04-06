@@ -28,6 +28,18 @@ router.get("/getall", (req, res) => {
     });
 });
 
+router.put("/update/:id", (req, res) => {
+  Model.findByIdAndUpdate(req.params.id, req.body)
+    .then((data) => {
+      console.log("user data updated successfully..");
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json(err);
+    });
+});
+
 router.post("/checklogin", (req, res) => {
   let formdata = req.body;
 
