@@ -5,6 +5,7 @@ const mySchema = new mongoose.Schema({
     description : String,
     assignedBy : {type: mongoose.Types.ObjectId, ref: 'users'},
     assignedTo : {type: mongoose.Types.ObjectId, ref: 'users'},
+    team : {type: mongoose.Types.ObjectId, ref: 'teams'},
     resolved : {type : Boolean, default: false},
     resolvedOn : Date,
     createdAt :{type : Date, default: new Date()}

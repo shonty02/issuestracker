@@ -83,6 +83,11 @@ const Header = ({ darktheme, setDarktheme }) => {
               </NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" to="/addissue">
+                Add Issue 
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" to="/teamdash">
                 Team Dashboard
               </NavLink>

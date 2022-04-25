@@ -13,6 +13,8 @@ const ManageTeam = () => {
 
   const [teamCreated, setTeamCreated] = useState(false);
 
+  const [issuesList, setIssuesList] = useState([]);
+
   const [teamForm, setTeamForm] = useState({
     title: currentUser.username + "'s Team",
     members: [],
@@ -21,6 +23,8 @@ const ManageTeam = () => {
     issues: [],
     thumbmail: "",
   });
+
+  
 
   const handleTeamUpdate = (formdata) => {
     console.log(formdata);

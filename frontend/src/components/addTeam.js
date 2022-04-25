@@ -14,9 +14,7 @@ const AddTeam = () => {
       members : "",
       admin : "",
       description : "",
-      issues : "",
-
-       
+      issues : "",       
   };
 
   const submitTeam = (values) => {

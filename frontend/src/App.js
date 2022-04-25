@@ -8,12 +8,14 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { useState } from "react";
 import Signup from "./components/signup";
 import addTeam from "./components/addTeam";
+import AddIssue from "./components/addIssue";
 
 import { UserProvider } from "./userContext";
 import AddTeam from "./components/addTeam";
 import ManageTeam from "./components/manageTeam";
 import Home from "./components/home";
 import ManageIssues from "./components/manageIssues";
+
 
 function App() {
   const [darktheme, setDarktheme] = useState(false);
@@ -50,6 +52,7 @@ function App() {
               <Route element={<Login />} path="/login" />
               <Route element={<Signup />} path="/signup" />
               <Route element={<AddTeam />} path="/addteam" />
+              <Route element={<AddIssue />} path="/addissue" />
               <Route element={<ManageTeam />} path="/teamdash" />
               <Route element={<Home />} path="/home" />
               <Route element={<ManageIssues />} path="/manageissues" />
