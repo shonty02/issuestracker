@@ -88,8 +88,8 @@ const Header = ({ darktheme, setDarktheme }) => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/teamdash">
-                Team Dashboard
+              <NavLink className="nav-link" to="/manageteam">
+                ManageTeam
               </NavLink>
             </li>
             <li className="nav-item">

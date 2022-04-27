@@ -53,9 +53,9 @@ function App() {
               <Route element={<Signup />} path="/signup" />
               <Route element={<AddTeam />} path="/addteam" />
               <Route element={<AddIssue />} path="/addissue" />
-              <Route element={<ManageTeam />} path="/teamdash" />
-              <Route element={<Home />} path="/home" />
               <Route element={<ManageIssues />} path="/manageissues" />
+              <Route element={<Home />} path="/home" />
+              <Route element={<ManageTeam  />} path="/manageteam" />
 
               <Route element={<Navigate to="/login" />} path="" />
             </Routes>

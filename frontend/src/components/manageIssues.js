@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import app_config from "../config";
-import { Button } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Button, Container, FormControl, InputLabel, MenuItem, Paper, Select, TextField } from "@mui/material";
 import toast, { Toaster } from "react-hot-toast";
+import { Formik } from "formik";
 
 const ManageIssues = () => {
   const [issueArray, setIssuesArray] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
+  const [members, setMembers] = useState([]);
+  const [team, setTeam] = useState({});
 
   const url = app_config.api_url;
 
@@ -17,6 +21,50 @@ const ManageIssues = () => {
         setIssuesArray(data);
         setLoading(false);
       });
+  };
+
+  const fetchTeam = () => {
+    fetch(url + '/issue/getbyuser/' + currentUser._id)
+      .then(res => {
+        console.log(res.status);
+        if (res.status === 200) {
+          res.json().then((data) => {
+            setTeam(data);
+          })
+        }
+      })
+  }
+
+  //   const teamForm = {
+  //     title : "",
+  //     members : "",
+  //     admin : "",
+  //     description : "",
+  //     issues : "",       
+  // };
+
+  const issueForm = {
+    title: "",
+    description: "",
+    assignedBy: currentUser._id,
+    assignedTo: "",
+    team: currentUser.team
+  };
+  const addIssue = (values) => {
+    console.log(values);
+
+    fetch(url + "/issue/add", {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      console.log(res.status);
+      if (res.status === 200) {
+        toast.success('Successfully toasted!')
+      }
+    });
   };
 
   const resolveIssue = (id) => {
@@ -43,49 +91,104 @@ const ManageIssues = () => {
   const displayIssues = () => {
     if (!loading) {
       return issueArray.map((issue, i) => (
-        <tr key={issue._id}>
-          <td>{i + 1}</td>
-          <td>{issue.title}</td>
-          <td>{issue.category}</td>
-          <td>{issue.issues}</td>
-          <td>
-            {new Date(issue.createdAt).toLocaleDateString()} &nbsp;
-            {new Date(issue.createdAt).toLocaleTimeString()}
-          </td>
-          {/* <td>
-            <Button
-              variant="contained"
-              color="error"
-              onClick={(e) => deleteIssues(team._id)}
-            >
-              <i className="fas fa-trash-alt"></i>
-            </Button>
-          </td> */}
-        </tr>
+        <Accordion>
+          <AccordionSummary>
+            {issue.title}
+          </AccordionSummary>
+          <AccordionDetails >
+
+          </AccordionDetails>
+        </Accordion>
+
       ));
     }
   };
 
-  return (
-    <div className="container">
-      <Toaster position="top-right" reverseOrder={false} />
-      <h1>Manage Issues</h1>
+  const getTeamMembers = (values, handleChange) => {
+    if (team != null) {
+      return <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Assign To</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="assignedTo"
+          value={values.assignedTo}
+          label="Assign To"
+          onChange={handleChange}
+        >{team.members.map(({ _id, username }) => {
+          <MenuItem value={_id}>{username}</MenuItem>
+          return
+        })}
+        </Select>
+      </FormControl>
+    }
+  }
 
-      <table className="table table-dark">
-        <thead>
-          <tr>
-            <th>S. No.</th>
-            <th>Team Name</th>
-            <th>Category</th>
-            <th>Issues</th>
-            <th>Create At</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>{displayIssues()}</tbody>
-      </table>
-    </div>
+  return (
+    <Paper>
+      <Container style={{ height: "100vh" }}>
+
+        <Formik initialValues={issueForm} onSubmit={addIssue}>
+          {({ values, handleChange, handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <TextField
+                className="mt-5 w-100"
+                label="Title"
+                variant="outlined"
+                color="secondary"
+                id="title"
+                value={values.title}
+                onChange={handleChange}
+              />
+              {getTeamMembers(values, handleChange)}
+
+              <TextField
+                className="mt-3 w-100"
+                label="description"
+                type="number"
+                variant="outlined"
+                color="secondary"
+                id="description"
+                value={values.description}
+                onChange={handleChange}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                className="mt-5"
+                color="secondary"
+              >
+                Add Team
+              </Button>
+
+
+            </form>
+          )}
+        </Formik>
+      </Container>
+    </Paper>
+
+
+
+    // <div className="container">
+    //   <Toaster position="top-right" reverseOrder={false} />
+    //   <h1>Manage Issues</h1>
+
+    //   <table className="table table-dark">
+    //     <thead>
+    //       <tr>
+    //         <th>S. No.</th>
+    //         <th>Team Name</th>
+    //         <th>Category</th>
+    //         <th>Issues</th>
+    //         <th>Create At</th>
+    //         <th></th>
+    //       </tr>
+    //     </thead>
+    //     <tbody>{displayIssues()}</tbody>
+    //   </table>
+    // </div>
   );
 };
+
 
 export default ManageIssues;

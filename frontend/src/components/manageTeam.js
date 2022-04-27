@@ -1,4 +1,4 @@
-import { Card, CardContent, Container, TextField, Button } from "@mui/material";
+import { Card, CardContent, Container, TextField, Button, Paper } from "@mui/material";
 import { Formik } from "formik";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
@@ -80,6 +80,14 @@ const ManageTeam = () => {
                 rows={4}
                 className="w-100"
               />
+            <Button
+              type="submit"
+              variant="contained"
+              className="mt-5"
+              color="secondary"
+            >
+              Add Team
+            </Button>
             </form>
           )}
         </Formik>
@@ -98,15 +106,81 @@ const ManageTeam = () => {
     }
   };
 
+  // const issueForm =  {
+  //   title : "",
+  //   description : "",
+  //   assignedBy : {},
+  //   assignedTo : {},
+  //   team : {},
+  //   resolved : {type : Boolean, default: false},
+  //   resolvedOn : "",
+  // };
+  // const submitTeam = (values) => {
+  //   console.log(values);
+
+  //   fetch(url + "/team/add", {
+  //     method: "POST",
+  //     body: JSON.stringify(values),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   }).then((res) => {
+  //     console.log(res.status);
+  //   });
+  // };
+
   return (
-    <div>
-      <Container>
-        <Card>
+    <Paper>
+    <Container style={{ height: "100vh" }}>
+
+      {/* <Formik initialValues={teamForm}  >
+        {({ values, handleChange, handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <TextField
+              className="mt-5 w-100"
+              label="Title"
+              variant="outlined"
+              color="secondary"
+              id="title"
+              value={values.title}
+              onChange={handleChange}
+            />
+
+            <TextField
+              className="mt-3 w-100"
+              label="description"
+              type="number"
+              variant="outlined"
+              color="secondary"
+              id="description"
+              value={values.description}
+              onChange={handleChange}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              className="mt-5"
+              color="secondary"
+            >
+              Add Team
+            </Button>
+          </form>
+        )}
+      </Formik> */}
+      <Card>
           <CardContent>{showTeamForm()}</CardContent>
         </Card>
-      </Container>
-    </div>
-  );
+    </Container>
+  </Paper>
+      
+
+      
+     
+);
 };
+    
+  
+
+
 
 export default ManageTeam;

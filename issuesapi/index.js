@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const userRouter = require("./routers/userRouter");
 const teamRouter = require("./routers/teamRouter");
+const issueRouter = require("./routers/issueRouter");
 
 const { createServer } = require("http");
 const { Server } = require("socket.io");
@@ -38,6 +39,7 @@ app.use(express.json());
 
 app.use("/user", userRouter);
 app.use("/team", teamRouter);
+app.use("/issue", issueRouter);
 
 // app.get("/", (req, res) => {
 //   res.send("you got a response");
