@@ -12,16 +12,16 @@ const AddIssue = () => {
   const [currentuser, setCurrentuser] = useState(JSON.parse(sessionStorage.getItem('user')));
 
   const fetchTeam = () => { 
-      fetch(url + "/team/", {
-        method: "POST",
-        body: JSON.stringify(),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-        console.log(res.status);
-      });
-  }
+    fetch(url + "/team/user", {
+      method: "POST",
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      console.log(res.status);
+    });
+}
 
   const issueForm = {
       title : "",
